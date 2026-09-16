@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estacionamento - Controle de Acesso</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0d1117;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Iluminação que acompanha o ponteiro */
+        .spotlight {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(0, 210, 133, 0.12) 0%, rgba(0, 210, 133, 0) 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Elementos de fundo adicionais */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(0, 210, 133, 0.08);
+            filter: blur(120px);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Estrutura Principal */
+        .stage {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 440px;
+            padding: 20px;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        /* Seção da Marca / Cabeçalho */
+        .mark {
+            margin-bottom: 28px;
+        }
+
+        .mark .kicker {
+            font-size: 0.85rem;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .mark h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .mark .rule {
+            width: 42px;
+            height: 3px;
+            background-color: #00d285;
+            margin-top: 10px;
+            border-radius: 2px;
+        }
+
+        /* Card do Formulário */
+        .card {
+            position: relative;
+            background: rgba(22, 27, 34, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 36px 32px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+        }
+
+        .card .clip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #00d285 0%, #008faa 100%);
+        }
+
+        .card h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #f0f6fc;
+        }
+
+        .card .sub {
+            font-size: 0.88rem;
+            color: #8b949e;
+            margin-bottom: 28px;
+            line-height: 1.4;
+        }
+
+        /* Campos de Entrada (Floating Labels) */
+        .field {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 18px 14px 6px 14px;
+            background: rgba(13, 17, 23, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .field label {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8b949e;
+            font-size: 0.9rem;
+            pointer-events: none;
+            transition: all 0.2s ease;
+        }
+
+        /* Efeito ao focar ou preencher o campo */
+        .field input:focus ~ label,
+        .field input:not(:placeholder-shown) ~ label {
+            top: 10px;
+            transform: translateY(0);
+            font-size: 0.72rem;
+            color: #00d285;
+            font-weight: 600;
+        }
+
+        .field input:focus {
+            border-color: #00d285;
+            background: rgba(13, 17, 23, 0.9);
+        }
+
+        /* Botão */
+        button[type="submit"] {
+            width: 100%;
+            padding: 13px;
+            background-color: #00d285;
+            border: none;
+            border-radius: 8px;
+            color: #0d1117;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #00e692;
+        }
+
+        button[type="submit"]:active {
+            transform: scale(0.99);
+        }
+
+        /* Rodapé */
+        .foot {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #8b949e;
+        }
+
+        .foot a {
+            color: #2f81f7;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 3px;
+        }
+
+        .foot a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Iluminação que acompanha o mouse -->
+<div class="spotlight" id="spotlight"></div>
+
+<div class="stage">
+
+    <div class="content">
+
+        <div class="mark">
+            <span class="kicker">Controle de acesso</span>
+
+            <h1>Estacionamento</h1>
+
+            <div class="rule"></div>
+        </div>
+
+        <div class="card">
+
+            <div class="clip"></div>
+
+            <h2>Identifique-se</h2>
+
+            <p class="sub">
+                Informe seu e-mail e senha para entrar.
+            </p>
+
+            <form method="post" action="/autenticar">
+
+                <div class="field">
+
+                    <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder=" "
+                            required
+                    >
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                </div>
+
+                <div class="field">
+
+                    <input
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder=" "
+                            required
+                    >
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                </div>
+
+                <button type="submit">
+                    Entrar
+                </button>
+
+            </form>
+
+            <p class="foot">
+                Não tem conta?
+                <a href="/cadastrar">Cadastre-se</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
