@@ -26,6 +26,8 @@ public class VeiculoEntity {
     private String cor;
     private String observacao;
     private LocalDateTime horaEntrada;
+    private LocalDateTime horaSaida;
+    private Boolean status;
 
 
     public String getCor() {
