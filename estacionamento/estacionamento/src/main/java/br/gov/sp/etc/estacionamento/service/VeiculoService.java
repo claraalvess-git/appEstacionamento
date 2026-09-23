@@ -10,7 +10,7 @@ public interface VeiculoService {
     public List<VeiculoEntity> listaVeiculo();
     public boolean deletarVeiculo(Long id);
     public VeiculoEntity atualizarVeiculo(VeiculoEntity v);
-    public Veiculo buscaVeiculoPorId(Long id);
+    public VeiculoEntity buscaVeiculoPorId(Long id);
 
     // o void serve para já cadastrar
 
