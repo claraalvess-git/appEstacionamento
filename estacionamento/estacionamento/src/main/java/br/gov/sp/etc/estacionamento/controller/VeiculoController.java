@@ -1,6 +1,7 @@
 package br.gov.sp.etc.estacionamento.controller;
 
 
+import br.gov.sp.etc.estacionamento.entity.VeiculoEntity;
 import br.gov.sp.etc.estacionamento.model.Veiculo;
 import br.gov.sp.etc.estacionamento.service.VeiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
