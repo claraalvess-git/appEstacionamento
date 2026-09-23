@@ -34,7 +34,8 @@ public class VeiculoController {
         return "registrar-saida";
     }
 
-    public String getVeiculo(){
+    @GetMapping("saida/{id}")
+    public String getVeiculo(Model model, @PathVariable Long id){
         return "registrar-saida";
     }
 }
