@@ -54,8 +54,8 @@ public class VeiculoServiceImpl implements VeiculoService {
     }
 
     @Override
-    public Veiculo buscaVeiculoPorId(Long id) {
-        return null;
+    public VeiculoEntity buscaVeiculoPorId(Long id) {
+        return repository.findById(id).orElseThrow();
     }
 
     // criar um metodo para mapear um Veiculo para VeiculoEntity
