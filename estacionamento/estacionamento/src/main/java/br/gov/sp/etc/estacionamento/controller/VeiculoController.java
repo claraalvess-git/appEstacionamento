@@ -36,6 +36,12 @@ public class VeiculoController {
 
     @GetMapping("saida/{id}")
     public String getVeiculo(Model model, @PathVariable Long id){
+        java.util.List<VeiculoEntity> veiculos = service.listaVeiculo();
+
+        model.addAttribute("veiculos", veiculos);
+
+        VeiculoEntity veiculo = service.
+
         return "registrar-saida";
     }
 }
