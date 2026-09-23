@@ -28,7 +28,7 @@ public class VeiculoController {
     }
 
     @GetMapping("registrar-saida")
-    public String registrarSaida() {
+    public String registrarSaida(Model model) { // nesse tipo Model que devolve as informaçoes p tela, ou seja , as placas
         return "registrar-saida";
     }
 }
