@@ -30,6 +30,7 @@ public class VeiculoController {
     @GetMapping("registrar-saida")
     public String registrarSaida(Model model) {// nesse tipo Model que devolve as informaçoes p tela, ou seja , as placas
        var veiculos = service.listaVeiculo(); // aqui ta trazendo todos os veiculos a tona
+       model.addAttribute("veiculos", veiculos);
         return "registrar-saida";
     }
 }
