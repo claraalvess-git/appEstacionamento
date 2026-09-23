@@ -26,4 +26,9 @@ public class VeiculoController {
     public String registrarEntrada(){
         return "registrar-entrada";
     }
+
+    @GetMapping("registrar-saida")
+    public String registrarSaida() {
+        return "registrar-saida";
+    }
 }
