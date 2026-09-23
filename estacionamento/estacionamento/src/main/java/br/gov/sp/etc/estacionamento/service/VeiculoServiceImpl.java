@@ -53,6 +53,11 @@ public class VeiculoServiceImpl implements VeiculoService {
         return repository.save(v); // .save serve para criar o dado na base e atualizar
     }
 
+    @Override
+    public Veiculo buscaVeiculoPorId(Long id) {
+        return null;
+    }
+
     // criar um metodo para mapear um Veiculo para VeiculoEntity
 
     private VeiculoEntity toEntity(Veiculo veiculo){
