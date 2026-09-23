@@ -40,7 +40,7 @@ public class VeiculoController {
 
         model.addAttribute("veiculos", veiculos);
 
-        VeiculoEntity veiculo = service.
+        VeiculoEntity veiculo = service.buscaVeiculoPorId(id);
 
         return "registrar-saida";
     }
