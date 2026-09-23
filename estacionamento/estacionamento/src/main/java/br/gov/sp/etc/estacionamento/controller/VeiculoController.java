@@ -33,4 +33,8 @@ public class VeiculoController {
        model.addAttribute("veiculos", veiculos); // entre "" é a chave, e o outro é o valor
         return "registrar-saida";
     }
+
+    public String getVeiculo(){
+        return "registrar-saida";
+    }
 }
