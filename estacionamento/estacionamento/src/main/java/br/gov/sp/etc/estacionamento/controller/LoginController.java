@@ -2,6 +2,7 @@ package br.gov.sp.etc.estacionamento.controller;
 
 import br.gov.sp.etc.estacionamento.model.Usuario;
 import br.gov.sp.etc.estacionamento.service.UsuarioService;
+import br.gov.sp.etc.estacionamento.service.VeiculoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
