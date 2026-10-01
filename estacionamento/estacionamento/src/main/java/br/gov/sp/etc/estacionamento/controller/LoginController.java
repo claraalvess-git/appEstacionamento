@@ -41,6 +41,13 @@ public class LoginController {
         return "cadastro-sucess";
     }
 
+    @GetMapping("/painel")
+    public String painel(Model model) {
+        var veiculos = veiculoService.listaVeiculo();
+        model.addAttribute("veiculos", veiculos);
+        return "painel";
+    }
+
     @PostMapping("/autenticar")
     public String autenticar(@RequestParam String email, @RequestParam String senha, Model model) {
         Usuario xpto = service.buscaUsuarioPorEmail(email);

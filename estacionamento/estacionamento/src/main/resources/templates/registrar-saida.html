@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Registrar entrada</title>
+    <title>Registrar saída</title>
 
     <style>
         * {
@@ -246,20 +246,53 @@
         }
 
         /* =========================================
-           CAMPOS
+           CAMPO DE SELEÇÃO
         ========================================= */
 
         .field {
             position: relative;
-
-            margin-bottom: 20px;
         }
 
-        .field input {
-            width: 100%;
-            height: 56px;
+        .field label {
+            display: block;
 
-            padding: 18px 14px 6px;
+            margin-bottom: 8px;
+
+            color: #8b949e;
+
+            font-size: 0.82rem;
+            font-weight: 500;
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper::after {
+            content: '⌄';
+
+            position: absolute;
+
+            top: 50%;
+            right: 14px;
+
+            transform: translateY(-55%);
+
+            color: #8b949e;
+
+            font-size: 1.1rem;
+
+            pointer-events: none;
+        }
+
+        select {
+            width: 100%;
+            height: 54px;
+
+            padding: 0 42px 0 14px;
+
+            appearance: none;
+            -webkit-appearance: none;
 
             background: rgba(13, 17, 23, 0.6);
 
@@ -273,47 +306,15 @@
 
             outline: none;
 
+            cursor: pointer;
+
             transition:
                 border-color 0.2s ease,
                 background-color 0.2s ease,
                 box-shadow 0.2s ease;
         }
 
-        .field input::placeholder {
-            color: transparent;
-        }
-
-        .field label {
-            position: absolute;
-
-            left: 14px;
-            top: 50%;
-
-            transform: translateY(-50%);
-
-            color: #8b949e;
-
-            font-size: 0.9rem;
-
-            pointer-events: none;
-
-            transition: all 0.2s ease;
-        }
-
-        /* Label flutuante */
-        .field input:focus ~ label,
-        .field input:not(:placeholder-shown) ~ label {
-            top: 10px;
-
-            transform: translateY(0);
-
-            color: #00d285;
-
-            font-size: 0.72rem;
-            font-weight: 600;
-        }
-
-        .field input:focus {
+        select:focus {
             background: rgba(13, 17, 23, 0.9);
 
             border-color: #00d285;
@@ -321,43 +322,13 @@
             box-shadow: 0 0 0 3px rgba(0, 210, 133, 0.08);
         }
 
-        /* =========================================
-           BOTÃO
-        ========================================= */
-
-        button[type="submit"] {
-            width: 100%;
-
-            padding: 13px;
-
-            margin-top: 10px;
-
-            background-color: #00d285;
-
-            border: none;
-            border-radius: 8px;
-
-            color: #0d1117;
-
-            font-size: 0.95rem;
-            font-weight: 700;
-
-            cursor: pointer;
-
-            transition:
-                background-color 0.2s ease,
-                transform 0.1s ease,
-                box-shadow 0.2s ease;
+        select:hover {
+            border-color: rgba(0, 210, 133, 0.45);
         }
 
-        button[type="submit"]:hover {
-            background-color: #00e692;
-
-            box-shadow: 0 8px 20px rgba(0, 210, 133, 0.15);
-        }
-
-        button[type="submit"]:active {
-            transform: scale(0.99);
+        select option {
+            background: #161b22;
+            color: #ffffff;
         }
 
         /* =========================================
@@ -366,14 +337,8 @@
 
         @media (max-width: 480px) {
 
-            body {
-                align-items: flex-start;
-
-                overflow-y: auto;
-            }
-
             .stage {
-                padding: 24px 16px;
+                padding: 16px;
             }
 
             .mark h1 {
@@ -396,7 +361,7 @@
 
     <div class="content">
 
-        <a href="/painel" class="btn-voltar">
+        <a href="/painel" th:href="@{/painel}" class="btn-voltar">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M19 12H5"></path>
@@ -417,71 +382,41 @@
 
             <div class="clip"></div>
 
-            <h2>Registrar entrada</h2>
+            <h2>Registrar saída</h2>
 
             <p class="sub">
-                Informe os dados do veículo para registrar sua entrada.
+                Selecione a placa do veículo que deseja retirar.
             </p>
 
-            <form method="post" action="/veiculo/cadastrar">
+            <div class="field">
 
-                <div class="field">
-                    <input
-                            type="text"
+                <label for="placa">
+                    Selecionar placa
+                </label>
+
+                <div class="select-wrapper">
+
+                    <select
                             id="placa"
-                            name="placa"
-                            placeholder=" "
+                            onchange="selecionarVeiculo(this.value)"
                     >
 
-                    <label for="placa">
-                        Placa
-                    </label>
+                        <option value="">
+                            Selecione a placa
+                        </option>
+
+                        <option
+                                th:each="v : ${veiculos}"
+                                th:value="${v.id}"
+                                th:text="${v.placa}"
+                                th:selected="${veiculo != null && veiculo.id == v.id}">
+                        </option>
+
+                    </select>
+
                 </div>
 
-                <div class="field">
-                    <input
-                            type="text"
-                            id="modelo"
-                            name="modelo"
-                            placeholder=" "
-                    >
-
-                    <label for="modelo">
-                        Modelo
-                    </label>
-                </div>
-
-                <div class="field">
-                    <input
-                            type="text"
-                            id="cor"
-                            name="cor"
-                            placeholder=" "
-                    >
-
-                    <label for="cor">
-                        Cor
-                    </label>
-                </div>
-
-                <div class="field">
-                    <input
-                            type="text"
-                            id="observacao"
-                            name="observacao"
-                            placeholder=" "
-                    >
-
-                    <label for="observacao">
-                        Observações
-                    </label>
-                </div>
-
-                <button type="submit">
-                    Salvar Entrada
-                </button>
-
-            </form>
+            </div>
 
         </div>
 
@@ -514,6 +449,19 @@
     }
 
     animateSpotlight();
+
+
+    /* =========================================
+       LÓGICA ORIGINAL
+    ========================================= */
+
+    function selecionarVeiculo(id) {
+        if (id) {
+            window.location.href = "/veiculo/saida/" + id;
+        } else {
+            window.location.href = "/veiculo/saida";
+        }
+    }
 </script>
 
 </body>
