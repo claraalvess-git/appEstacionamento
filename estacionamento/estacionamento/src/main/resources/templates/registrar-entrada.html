@@ -424,6 +424,40 @@
                     Salvar Entrada
                 </button>
 
-</form>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    const spotlight = document.getElementById('spotlight');
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+
+    let currentX = mouseX;
+    let currentY = mouseY;
+
+    document.addEventListener('mousemove', (event) => {
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+    });
+
+    function animateSpotlight() {
+        currentX += (mouseX - currentX) * 0.08;
+        currentY += (mouseY - currentY) * 0.08;
+
+        spotlight.style.left = `${currentX}px`;
+        spotlight.style.top = `${currentY}px`;
+
+        requestAnimationFrame(animateSpotlight);
+    }
+
+    animateSpotlight();
+</script>
+
 </body>
 </html>
