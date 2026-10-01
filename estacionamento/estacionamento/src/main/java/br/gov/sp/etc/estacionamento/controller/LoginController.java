@@ -38,7 +38,7 @@ public class LoginController {
     }
 
     @PostMapping("/autenticar")
-    public String autenticar(@RequestParam String email, @RequestParam String senha) {
+    public String autenticar(@RequestParam String email, @RequestParam String senha, Model model) {
         Usuario xpto = service.buscaUsuarioPorEmail(email);
 
         if (xpto != null && senha.equals(xpto.getSenha())) {
