@@ -42,6 +42,7 @@ public class LoginController {
         Usuario xpto = service.buscaUsuarioPorEmail(email);
 
         if (xpto != null && senha.equals(xpto.getSenha())) {
+            var veiculos = veiculoService.listaVeiculo();
             return "painel";
         } else {
             return "erro";
