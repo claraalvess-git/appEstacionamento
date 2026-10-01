@@ -341,7 +341,32 @@
 </head>
 <body>
 
-<form method="post" action="/veiculo/cadastrar">
+<!-- Iluminação que acompanha o mouse -->
+<div class="spotlight" id="spotlight"></div>
+
+<div class="stage">
+
+    <div class="content">
+
+        <div class="mark">
+            <span class="kicker">Controle de acesso</span>
+
+            <h1>Estacionamento</h1>
+
+            <div class="rule"></div>
+        </div>
+
+        <div class="card">
+
+            <div class="clip"></div>
+
+            <h2>Registrar entrada</h2>
+
+            <p class="sub">
+                Informe os dados do veículo para registrar sua entrada.
+            </p>
+
+            <form method="post" action="/veiculo/cadastrar">
 
   <input type="text" id="placa" name="placa" placeholder="Digite a placa"></br>
   <input type="text" id="modelo" name="modelo" placeholder="Digite o modelo"></br>
