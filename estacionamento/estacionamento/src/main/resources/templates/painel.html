@@ -23,10 +23,10 @@
     </thead>
 
     <tbody>
-    <tr th:each>
-        <td>CPT-9630</td>
-        <td>T-Cross</td>
-        <td>11:00</td>
+    <tr th:each = "veiculo : ${veiculos}">
+        <td th:text = "${veiculo.placa}"></td>
+        <td th:text = "${veiculo.modelo}"></td>
+        <td th:text = "${veiculo.horaEntrada}"></td>
         <td>Estacionado</td>
     </tr>
     </tbody>
