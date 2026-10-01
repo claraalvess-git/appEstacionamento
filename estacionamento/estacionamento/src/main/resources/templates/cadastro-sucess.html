@@ -197,6 +197,71 @@
     </style>
 </head>
 <body>
-<h2>Cadastro realizado com sucesso</h2>
+
+<!-- Iluminação que acompanha o mouse -->
+<div class="spotlight" id="spotlight"></div>
+
+<div class="stage">
+
+    <div class="content">
+
+        <div class="mark">
+            <span class="kicker">Controle de acesso</span>
+
+            <h1>Estacionamento</h1>
+
+            <div class="rule"></div>
+        </div>
+
+        <div class="card">
+
+            <div class="clip"></div>
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>Cadastro realizado com sucesso</h2>
+
+            <p class="sub">
+                Seu cadastro foi concluído com sucesso.
+            </p>
+
+            <p class="foot">
+                <a href="/login">Voltar para o login</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    const spotlight = document.getElementById('spotlight');
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let currentX = mouseX;
+    let currentY = mouseY;
+
+    document.addEventListener('mousemove', (event) => {
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+    });
+
+    function animateSpotlight() {
+        currentX += (mouseX - currentX) * 0.08;
+        currentY += (mouseY - currentY) * 0.08;
+
+        spotlight.style.left = `${currentX}px`;
+        spotlight.style.top = `${currentY}px`;
+
+        requestAnimationFrame(animateSpotlight);
+    }
+
+    animateSpotlight();
+</script>
+
 </body>
 </html>
