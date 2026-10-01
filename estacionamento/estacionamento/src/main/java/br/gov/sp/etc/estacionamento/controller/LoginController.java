@@ -43,6 +43,7 @@ public class LoginController {
 
         if (xpto != null && senha.equals(xpto.getSenha())) {
             var veiculos = veiculoService.listaVeiculo();
+            model.addAttribute("veiculos", veiculos);
             return "painel";
         } else {
             return "erro";
