@@ -466,15 +466,15 @@
                 </tr>
                 </thead>
 
-    <tbody>
-    <tr th:each = "veiculo : ${veiculos}">
-        <td th:text = "${veiculo.placa}"></td>
-        <td th:text = "${veiculo.modelo}"></td>
-        <td th:text = "${veiculo.horaEntrada}"></td>
-        <td>Estacionado</td>
-    </tr>
-    </tbody>
-</table>
+                <tbody>
+                <tr th:each="veiculo : ${veiculos}">
+                    <td th:text="${veiculo.placa}"></td>
+                    <td th:text="${veiculo.modelo}"></td>
+                    <td th:text="${veiculo.horaEntrada}"></td>
+                    <td>Estacionado</td>
+                </tr>
+                </tbody>
+            </table>
 
         </div>
 
