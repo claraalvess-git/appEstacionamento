@@ -295,6 +295,73 @@
                     <label for="cpf">CPF</label>
                 </div>
 
+                <div class="field">
+                    <input
+                            type="date"
+                            id="data"
+                            name="data"
+                            placeholder=" "
+                    >
+                    <label for="data">Data de nascimento</label>
+                </div>
+
+                <div class="field">
+                    <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder=" "
+                    >
+                    <label for="email">E-mail</label>
+                </div>
+
+                <div class="field">
+                    <input
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder=" "
+                    >
+                    <label for="senha">Senha</label>
+                </div>
+
+                <button type="submit">
+                    Cadastrar
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    const spotlight = document.getElementById('spotlight');
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let currentX = mouseX;
+    let currentY = mouseY;
+
+    document.addEventListener('mousemove', (event) => {
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+    });
+
+    function animateSpotlight() {
+        currentX += (mouseX - currentX) * 0.08;
+        currentY += (mouseY - currentY) * 0.08;
+
+        spotlight.style.left = `${currentX}px`;
+        spotlight.style.top = `${currentY}px`;
+
+        requestAnimationFrame(animateSpotlight);
+    }
+
+    animateSpotlight();
+</script>
 
 </body>
 </html>
