@@ -2,7 +2,174 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>erro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erro</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0d1117;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Iluminação que acompanha o ponteiro */
+        .spotlight {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(
+                circle,
+                rgba(0, 210, 133, 0.12) 0%,
+                rgba(0, 210, 133, 0) 70%
+            );
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 0;
+            will-change: left, top;
+        }
+
+        /* Iluminação ambiente */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(0, 210, 133, 0.08);
+            filter: blur(120px);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Estrutura principal */
+        .stage {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 440px;
+            padding: 20px;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        /* Marca */
+        .mark {
+            margin-bottom: 28px;
+        }
+
+        .mark .kicker {
+            font-size: 0.85rem;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .mark h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .mark .rule {
+            width: 42px;
+            height: 3px;
+            background-color: #00d285;
+            margin-top: 10px;
+            border-radius: 2px;
+        }
+
+        /* Card */
+        .card {
+            position: relative;
+            width: 100%;
+            padding: 36px 32px;
+            background: rgba(22, 27, 34, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* Linha superior */
+        .card .clip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                #00d285 0%,
+                #008faa 100%
+            );
+        }
+
+        /* Ícone */
+        .error-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #8b949e;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .card h2 {
+            color: #f0f6fc;
+            font-size: 1.4rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* Responsividade */
+        @media (max-width: 480px) {
+            .stage {
+                padding: 16px;
+            }
+
+            .mark h1 {
+                font-size: 1.9rem;
+            }
+
+            .card {
+                padding: 32px 24px;
+            }
+        }
+    </style>
 </head>
 <body>
 
