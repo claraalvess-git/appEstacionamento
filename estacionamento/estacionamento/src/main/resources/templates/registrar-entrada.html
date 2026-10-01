@@ -2,7 +2,342 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registrar entrada</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0d1117;
+            color: #ffffff;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* =========================================
+           SPOTLIGHT
+        ========================================= */
+
+        .spotlight {
+            position: fixed;
+
+            top: 50%;
+            left: 50%;
+
+            width: 700px;
+            height: 700px;
+
+            background: radial-gradient(
+                circle,
+                rgba(0, 210, 133, 0.12) 0%,
+                rgba(0, 210, 133, 0) 70%
+            );
+
+            border-radius: 50%;
+
+            transform: translate(-50%, -50%);
+
+            pointer-events: none;
+            z-index: 0;
+
+            will-change: left, top;
+        }
+
+        body::before {
+            content: '';
+
+            position: absolute;
+
+            top: -10%;
+            left: -10%;
+
+            width: 400px;
+            height: 400px;
+
+            background: rgba(0, 210, 133, 0.08);
+
+            filter: blur(120px);
+
+            border-radius: 50%;
+
+            pointer-events: none;
+        }
+
+        /* =========================================
+           ESTRUTURA
+        ========================================= */
+
+        .stage {
+            position: relative;
+            z-index: 1;
+
+            width: 100%;
+            max-width: 440px;
+
+            padding: 20px;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        /* =========================================
+           MARCA
+        ========================================= */
+
+        .mark {
+            margin-bottom: 28px;
+        }
+
+        .mark .kicker {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #8b949e;
+
+            font-size: 0.85rem;
+            font-weight: 500;
+
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .mark h1 {
+            color: #ffffff;
+
+            font-size: 2.2rem;
+            font-weight: 700;
+
+            letter-spacing: -0.5px;
+        }
+
+        .mark .rule {
+            width: 42px;
+            height: 3px;
+
+            margin-top: 10px;
+
+            background-color: #00d285;
+
+            border-radius: 2px;
+        }
+
+        /* =========================================
+           CARD
+        ========================================= */
+
+        .card {
+            position: relative;
+
+            width: 100%;
+
+            padding: 36px 32px;
+
+            background: rgba(22, 27, 34, 0.85);
+
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            border-radius: 16px;
+
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+
+            overflow: hidden;
+        }
+
+        .card .clip {
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 3px;
+
+            background: linear-gradient(
+                90deg,
+                #00d285 0%,
+                #008faa 100%
+            );
+        }
+
+        .card h2 {
+            color: #f0f6fc;
+
+            font-size: 1.4rem;
+            font-weight: 600;
+
+            margin-bottom: 6px;
+        }
+
+        .card .sub {
+            color: #8b949e;
+
+            font-size: 0.88rem;
+            line-height: 1.4;
+
+            margin-bottom: 28px;
+        }
+
+        /* =========================================
+           CAMPOS
+        ========================================= */
+
+        .field {
+            position: relative;
+
+            margin-bottom: 20px;
+        }
+
+        .field input {
+            width: 100%;
+            height: 56px;
+
+            padding: 18px 14px 6px;
+
+            background: rgba(13, 17, 23, 0.6);
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+
+            border-radius: 8px;
+
+            color: #ffffff;
+
+            font-size: 0.95rem;
+
+            outline: none;
+
+            transition:
+                border-color 0.2s ease,
+                background-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .field input::placeholder {
+            color: transparent;
+        }
+
+        .field label {
+            position: absolute;
+
+            left: 14px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #8b949e;
+
+            font-size: 0.9rem;
+
+            pointer-events: none;
+
+            transition: all 0.2s ease;
+        }
+
+        /* Label flutuante */
+        .field input:focus ~ label,
+        .field input:not(:placeholder-shown) ~ label {
+            top: 10px;
+
+            transform: translateY(0);
+
+            color: #00d285;
+
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        .field input:focus {
+            background: rgba(13, 17, 23, 0.9);
+
+            border-color: #00d285;
+
+            box-shadow: 0 0 0 3px rgba(0, 210, 133, 0.08);
+        }
+
+        /* =========================================
+           BOTÃO
+        ========================================= */
+
+        button[type="submit"] {
+            width: 100%;
+
+            padding: 13px;
+
+            margin-top: 10px;
+
+            background-color: #00d285;
+
+            border: none;
+            border-radius: 8px;
+
+            color: #0d1117;
+
+            font-size: 0.95rem;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background-color 0.2s ease,
+                transform 0.1s ease,
+                box-shadow 0.2s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #00e692;
+
+            box-shadow: 0 8px 20px rgba(0, 210, 133, 0.15);
+        }
+
+        button[type="submit"]:active {
+            transform: scale(0.99);
+        }
+
+        /* =========================================
+           RESPONSIVIDADE
+        ========================================= */
+
+        @media (max-width: 480px) {
+
+            body {
+                align-items: flex-start;
+
+                overflow-y: auto;
+            }
+
+            .stage {
+                padding: 24px 16px;
+            }
+
+            .mark h1 {
+                font-size: 1.9rem;
+            }
+
+            .card {
+                padding: 32px 24px;
+            }
+        }
+    </style>
 </head>
 <body>
 
