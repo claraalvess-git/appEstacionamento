@@ -473,6 +473,9 @@
                     <td th:text="${#temporals.format(veiculo.horaEntrada, 'HH:mm')"></td>
                     <td>Estacionado</td>
                 </tr>
+                <tr th:if="${#lists.isEmpty(veiculos)}">
+                    <td colspan="4">Nenhum veículo estacionado.</td>
+                </tr>
                 </tbody>
             </table>
 
