@@ -20,8 +20,10 @@ public class VeiculoController {
     VeiculoService service;
 
     @PostMapping("cadastrar")
-    public String cadastrar(Veiculo x){
+    public String cadastrar(Veiculo x, Model model){
         service.cadastrarVeiculo(x);
+        var veiculos = service.listaVeiculo();
+        model.addAttribute("veiculos", veiculos);
         return "registrar-entrada";
     }
 
