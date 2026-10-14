@@ -472,7 +472,9 @@
                     <td th:text="${veiculo.modelo}"></td>
                     <td th:text="${#temporals.format(veiculo.horaEntrada, 'HH:mm')"></td>
                     <td>
+                        <form th:action = "'saida/'+${veiculo.id}">
                         <button> Confirmar Saídad</button>
+                        </form>
                     </td>
                 </tr>
                 <tr th:if="${#lists.isEmpty(veiculos)}">
