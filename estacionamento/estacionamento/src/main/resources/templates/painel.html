@@ -470,7 +470,7 @@
                 <tr th:each="veiculo : ${veiculos}">
                     <td th:text="${veiculo.placa}"></td>
                     <td th:text="${veiculo.modelo}"></td>
-                    <td th:text="${veiculo.horaEntrada}"></td>
+                    <td th:text="${#temporals.format(veiculo.horaEntrada, 'HH:mm')"></td>
                     <td>Estacionado</td>
                 </tr>
                 </tbody>
