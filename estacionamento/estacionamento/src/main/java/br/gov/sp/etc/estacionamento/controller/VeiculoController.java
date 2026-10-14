@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("veiculo") // quer dizer que tudo vai ter veiculo antes, generalização
 public class VeiculoController {
@@ -41,7 +43,10 @@ public class VeiculoController {
 
     @GetMapping("saida/{id}")
     public String getVeiculo(Model model, @PathVariable Long id){
-        java.util.List<VeiculoEntity> veiculos = service.listaVeiculo();
+
+        service.registrarSaida(id);
+
+        List<VeiculoEntity> veiculos = service.listaVeiculo();
 
         model.addAttribute("veiculos", veiculos);
 
