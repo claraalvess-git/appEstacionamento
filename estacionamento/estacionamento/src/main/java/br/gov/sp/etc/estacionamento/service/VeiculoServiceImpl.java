@@ -58,6 +58,16 @@ public class VeiculoServiceImpl implements VeiculoService {
         return repository.findById(id).orElseThrow();
     }
 
+    @Override
+    public void registrarSaida(Long id) {
+        var veiculo = repository.findById(id).orElseThrow();
+        if(veiculo.getHoraSaida()==null){
+            veiculo.setHoraSaida(LocalDateTime.now());
+            veiculo.setEstacionado(false);
+            repository.save(veiculo);
+        }
+    }
+
     // criar um metodo para mapear um Veiculo para VeiculoEntity
 
     private VeiculoEntity toEntity(Veiculo veiculo){

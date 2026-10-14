@@ -93,5 +93,8 @@ public class VeiculoEntity {
     public void setHoraSaida(LocalDateTime horaSaida) {
         this.horaSaida = horaSaida;
     }
+
+    public void setEstacionado(boolean b) {
+    }
 }
 
