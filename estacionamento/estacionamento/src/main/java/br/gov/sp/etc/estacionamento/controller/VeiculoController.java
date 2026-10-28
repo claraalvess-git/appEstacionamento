@@ -50,6 +50,6 @@ public class VeiculoController {
 
         model.addAttribute("veiculos", veiculos);
 
-        return "registrar-saida";
+        return "redirect:/veiculo/registrar-saida";
     }
 }

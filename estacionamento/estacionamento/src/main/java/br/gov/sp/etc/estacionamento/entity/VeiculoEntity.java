@@ -28,6 +28,7 @@ public class VeiculoEntity {
     private LocalDateTime horaEntrada;
     private LocalDateTime horaSaida;
     private Boolean status;
+    private Boolean estacionado;
 
 
     public String getCor() {
@@ -95,6 +96,14 @@ public class VeiculoEntity {
     }
 
     public void setEstacionado(boolean b) {
+    }
+
+    public Boolean getEstacionado() {
+        return estacionado;
+    }
+
+    public void setEstacionado(Boolean estacionado) {
+        this.estacionado = estacionado;
     }
 }
 
